@@ -25,7 +25,7 @@ public class XmlFile {
             if (matcher.find()) {
                 if(matcher.group(1).equals(matcher.group(3))) continue;
                 else{
-                    errors = errors + "Unmatching tags Error..\n";
+                    errors += "Unmatching tags Error in line: " + line + '\n';
                 }
             } else {
                 Pattern pattern2 = Pattern.compile("^\\s*</(.*)>$");
@@ -33,8 +33,14 @@ public class XmlFile {
                 if (matcher2.find()){
                     if(!stack.empty() && stack.peek().equals(matcher2.group(1))) stack.pop();
                     else{
-                        if(stack.contains(matcher2.group(1))) errors = errors + "Missing closing tag Error..\n";
-                        else errors = errors + "Missing opening tag Error..\n";
+                        if(stack.contains(matcher2.group(1))) {
+                            while(!stack.peek().equals(matcher2.group(1))){
+                                errors += "Missing closing tag Error for the opening tag: <" + stack.peek() + ">\n";
+                                stack.pop();
+                            }
+                            stack.pop();
+                        }
+                        else errors += "Missing opening tag Error for the closing tag: <\\" + matcher2.group(1) + ">\n";
                     }
                 }else{
                     Pattern pattern3 = Pattern.compile("^\\s*<(.*)>$");
@@ -45,19 +51,22 @@ public class XmlFile {
                         Pattern pattern4 = Pattern.compile("^\\s*<(.*)>(.*)$");
                         Matcher matcher4 = pattern4.matcher(line);
                         if (matcher4.find()){
-                            if(matcher4.group(2) != null) errors = errors + "Missing closing tag Error..\n";
+                            if(matcher4.group(2) != null) errors += "Missing closing tag Error in the line: " + line + '\n';
                         }else{
                             Pattern pattern5 = Pattern.compile("^\\s*(.*)</(.*)>$");
                             Matcher matcher5 = pattern5.matcher(line);
                             if (matcher5.find()){
-                                errors = errors + "Missing opening tag Error..\n";
+                                errors += "Missing opening tag Error in the line: " + line + '\n';
                             }
                         }
                     }
                 }
             }
         }
-        if(!stack.empty()) errors = errors + "Missing closing tag Error..\n";
+        while(!stack.empty()) {
+            errors += "Missing closing tag Error for the opening tag: <" + stack.peek() + ">\n";
+            stack.pop();
+        }
         br.close();
         return errors;
     }
