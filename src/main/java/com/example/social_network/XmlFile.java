@@ -40,7 +40,7 @@ public class XmlFile {
                             }
                             stack.pop();
                         }
-                        else errors += "Missing opening tag Error for the closing tag: <\\" + matcher2.group(1) + ">\n";
+                        else errors += "Missing opening tag Error for the closing tag: </" + matcher2.group(1) + ">\n";
                     }
                 }else{
                     Pattern pattern3 = Pattern.compile("^\\s*<(.*)>$");
@@ -69,5 +69,68 @@ public class XmlFile {
         }
         br.close();
         return errors;
+    }
+
+    public String correctErrors() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(this.filePath));
+        String line = null;
+        String output = null;
+        while ((line = br.readLine()) != null) {
+            Pattern pattern = Pattern.compile("^\\s*<(.*)>(.*)</(.*)>$");
+            Matcher matcher = pattern.matcher(line);
+            if (matcher.find()) {
+                if(matcher.group(1).equals(matcher.group(3))) output += line;
+                else{
+                    output += "<" + matcher.group(1) + ">" + matcher.group(2) + "</" + matcher.group(1) + ">" + '\n';
+                }
+            } else {
+                Pattern pattern2 = Pattern.compile("^\\s*</(.*)>$");
+                Matcher matcher2 = pattern2.matcher(line);
+                if (matcher2.find()){
+                    if(!stack.empty() && stack.peek().equals(matcher2.group(1))){
+                        stack.pop();
+                        output += line;
+                    }
+                    else{
+                        if(stack.contains(matcher2.group(1))) {
+                            while(!stack.peek().equals(matcher2.group(1))){
+                                output += "</" + stack.peek() + ">\n";
+                                stack.pop();
+                            }
+                            output += "</" + stack.peek() + ">\n";
+                            stack.pop();
+                        }
+                        else output += "<" + matcher2.group(1) + "> </" + matcher2.group(1) + ">\n";
+                    }
+                }else{
+                    Pattern pattern3 = Pattern.compile("^\\s*<(.*)>$");
+                    Matcher matcher3 = pattern3.matcher(line);
+                    if (matcher3.find()){
+                        stack.push(matcher3.group(1));
+                        output += "<" + matcher3.group(1) + ">\n";
+                    }else{
+                        Pattern pattern4 = Pattern.compile("^\\s*<(.*)>(.*)$");
+                        Matcher matcher4 = pattern4.matcher(line);
+                        if (matcher4.find()){
+                            //if(matcher4.group(2) != null)
+                            output += line + "</" + matcher4.group(1) + ">\n";
+                        }else{
+                            Pattern pattern5 = Pattern.compile("^\\s*(.*)</(.*)>$");
+                            Matcher matcher5 = pattern5.matcher(line);
+                            if (matcher5.find()){
+                                output += "<" + matcher5.group(2) + ">" + matcher5.group(1) + "</" + matcher5.group(2) + ">\n";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        while(!stack.empty()) {
+            output += "</" + stack.peek() + ">\n";
+            stack.pop();
+        }
+        br.close();
+        //output.prettify();
+        return output;
     }
 }
