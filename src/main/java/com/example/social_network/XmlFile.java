@@ -79,7 +79,7 @@ public class XmlFile {
             Pattern pattern = Pattern.compile("^\\s*<(.*)>(.*)</(.*)>$");
             Matcher matcher = pattern.matcher(line);
             if (matcher.find()) {
-                if(matcher.group(1).equals(matcher.group(3))) output += line;
+                if(matcher.group(1).equals(matcher.group(3))) output += line.trim();
                 else{
                     output += "<" + matcher.group(1) + ">" + matcher.group(2) + "</" + matcher.group(1) + ">" + '\n';
                 }
@@ -89,7 +89,7 @@ public class XmlFile {
                 if (matcher2.find()){
                     if(!stack.empty() && stack.peek().equals(matcher2.group(1))){
                         stack.pop();
-                        output += line;
+                        output += line.trim();
                     }
                     else{
                         if(stack.contains(matcher2.group(1))) {
