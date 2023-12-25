@@ -6,14 +6,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.social_network.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="837.0" style="-fx-background-color: #cbdced;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.social_network.HelloController">
     <children>
-        <TextArea fx:id="txtBox" layoutX="61.0" layoutY="39.0" prefHeight="46.0" prefWidth="307.0" promptText="Write the XML file path or content..." />
-        <Button fx:id="processBtn" layoutX="449.0" layoutY="49.0" mnemonicParsing="false" onAction="#onProcessButtonClick" text="Process File" />
-        <Label fx:id="label" alignment="CENTER" layoutX="24.0" layoutY="119.0" lineSpacing="1.0" prefHeight="236.0" prefWidth="550.0" textAlignment="CENTER" textFill="#c91e1e">
+        <TextArea fx:id="txtBox" layoutX="35.0" layoutY="26.0" prefHeight="46.0" prefWidth="307.0" promptText="Write the XML file path or content..." />
+        <Button fx:id="processBtn" layoutX="389.0" layoutY="36.0" mnemonicParsing="false" onAction="#onProcessButtonClick" text="Process File" />
+        <Label fx:id="label" alignment="CENTER" layoutX="27.0" layoutY="131.0" lineSpacing="1.0" prefHeight="306.0" prefWidth="692.0" textAlignment="CENTER" textFill="#c91e1e">
+
          <font>
             <Font size="16.0" />
          </font>
         </Label>
+        <Button layoutX="27.0" layoutY="437.0" mnemonicParsing="false" onAction="#OnFormatButtonClick" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #6587a1;" text="Formatting" textFill="#000000f5">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button layoutX="166.0" layoutY="437.0" mnemonicParsing="false" onAction="#OnMinifyButtonClick" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #6587a1;" text="Minifying" textFill="#000000f5">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button layoutX="436.0" layoutY="437.0" mnemonicParsing="false" onAction="#OnCompressButtonClick" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #6587a1;" text="Compression" textFill="#000000f5">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button layoutX="574.0" layoutY="437.0" mnemonicParsing="false" onAction="#OnDecompressButtonClick" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #6587a1;" text="Decompression" textFill="#000000f5">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button layoutX="298.0" layoutY="437.0" mnemonicParsing="false" onAction="#OnJSONButtonClick" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #6587a1;" text="XML To JSON" textFill="#000000f5">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button layoutX="707.0" layoutY="437.0" mnemonicParsing="false" onAction="#OnGraphButtonClick" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #6587a1;" text="Graph" textFill="#000000f5">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
     </children>
 </AnchorPane>
