@@ -3,22 +3,23 @@ package com.example.social_network;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class XmlFile {
-    private String filePath;
+    private String fileContent;
     private Stack<String> stack;
     private String errors;
-    public XmlFile(String filePath){
-        this.filePath = filePath;
+    public XmlFile(String fileContent){
+        this.fileContent = fileContent;
         this.stack = new Stack<> ();
         this.errors = new String();
     }
     public String validateFile() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(this.filePath));
-        String line = null;
+        BufferedReader br = new BufferedReader(new StringReader(this.fileContent));
+        String line;
         while ((line = br.readLine()) != null) {
             Pattern pattern = Pattern.compile("^\\s*<(.*)>(.*)</(.*)>$");
             Matcher matcher = pattern.matcher(line);
@@ -72,8 +73,8 @@ public class XmlFile {
     }
 
     public String correctErrors() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(this.filePath));
-        String line = null;
+        BufferedReader br = new BufferedReader(new FileReader(this.fileContent));
+        String line;
         String output = null;
         while ((line = br.readLine()) != null) {
             Pattern pattern = Pattern.compile("^\\s*<(.*)>(.*)</(.*)>$");
