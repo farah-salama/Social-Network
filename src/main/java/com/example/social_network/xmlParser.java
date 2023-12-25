@@ -1,5 +1,5 @@
 
-package com.project.socialnetworkrepresentation;
+package com.example.social_network;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;

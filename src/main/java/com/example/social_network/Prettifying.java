@@ -3,7 +3,7 @@ Task : Prettifying an xml file
 Author : Carol Maged
 */
 
-package com.mycompany.proj1;
+package com.example.social_network;
 
 /*import static com.mycompany.proj1.Proj1.redoStack;
 import static com.mycompany.proj1.Proj1.undoStack;*/

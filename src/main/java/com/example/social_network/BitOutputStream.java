@@ -1,4 +1,4 @@
-
+package com.example.social_network;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 

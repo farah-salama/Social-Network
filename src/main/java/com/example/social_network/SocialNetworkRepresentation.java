@@ -1,4 +1,4 @@
-package com.project.socialnetworkrepresentation;
+package com.example.social_network;
 
 import java.util.ArrayList;
 import java.util.HashMap;
