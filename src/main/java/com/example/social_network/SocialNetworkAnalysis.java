@@ -1,5 +1,5 @@
 
-package NetworkAnalysis;
+package com.example.social_network;
 
 import java.util.ArrayList;
 import java.util.HashSet;
