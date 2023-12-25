@@ -1,23 +1,27 @@
-package com.example.social_network;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class HelloController {
+    FileChooser fileChooser = new FileChooser();
+    File inputpath, outputpath;
     @FXML
     private TextArea txtBox;
-    @FXML
-    private Label label;
+
+    private TextArea input;
+    private TextArea output;
 
     @FXML
+    private Label label;
+@FXML
     protected void onProcessButtonClick(ActionEvent event) throws IOException {
         //System.out.println(txtBox.getText());
         String userInput = txtBox.getText();
@@ -31,4 +35,10 @@ public class HelloController {
         if(errors.isEmpty()) label.setText("No Errors Detected!");
         else label.setText("Errors Detected:\n" + errors);
     }
-}
+    @FXML
+    protected void OnCompressButtonClick (ActionEvent event) {
+        output.clear();
+         String xml = input.getText();
+        outputpath = fileChooser.showSaveDialog(new Stage());
+        if (outputpath != null)
+        {
