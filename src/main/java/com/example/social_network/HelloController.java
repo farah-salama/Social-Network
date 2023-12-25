@@ -1,3 +1,4 @@
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,13 +12,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class HelloController {
-    FileChooser fileChooser = new FileChooser();
-    File inputpath, outputpath;
+    
+   
     @FXML
     private TextArea txtBox;
-
-    private TextArea input;
-    private TextArea output;
 
     @FXML
     private Label label;
@@ -37,8 +35,35 @@ public class HelloController {
     }
     @FXML
     protected void OnCompressButtonClick (ActionEvent event) {
-        output.clear();
-         String xml = input.getText();
-        outputpath = fileChooser.showSaveDialog(new Stage());
-        if (outputpath != null)
-        {
+    }
+
+          
+    @FXML
+    protected void OnDecompressButtonClick (ActionEvent event) {
+       
+    
+    }
+
+    @FXML
+    protected void OnFormatButtonClick (ActionEvent event) {
+       
+    }
+
+    @FXML
+    protected void OnMinifyButtonClick (ActionEvent event) {
+       
+
+    }
+    @FXML
+    protected void OnJSONButtonClick (ActionEvent event) {
+       
+
+    }
+    @FXML
+    protected void OnGraphButtonClick (ActionEvent event) {
+       
+
+    }
+
+
+}
