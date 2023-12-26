@@ -1,12 +1,13 @@
 
-package com.example.social_network;
+package org.example.graphvisualization;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,12 +15,12 @@ import java.util.Map;
 
 public class xmlParser {
 
-    public static void main(String[] args) {
-        String filePath = "F:\\college\\1st Semester\\ds\\Project social network\\socialNetworkRepresentation\\src\\main\\java\\com\\project\\socialnetworkrepresentation\\sample.xml";
+  /*  public static void main(String[] args) {
+        String filePath = "F:\\\\college\\\\1st Semester\\\\ds\\\\Project social network\\\\socialNetworkRepresentation\\\\src\\\\main\\\\java\\\\com\\\\project\\\\socialnetworkrepresentation\\\\sample.xml";
         SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);
         network.printNetwork();
 
-        /*
+
         List<User> users = xmlParser.parse(filePath);
         for (User user : users) {
             System.out.println("User name: " + user.getName());
@@ -39,8 +40,9 @@ public class xmlParser {
 
 
         }
-*/
+
     }
+    */
 
     public static SocialNetworkRepresentation createNetworkFromXML(String filePath) {
         List<User> users = xmlParser.parse(filePath);
@@ -130,6 +132,7 @@ public class xmlParser {
             }
 
         } catch (Exception e) {
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
         }
         //return the users as list
