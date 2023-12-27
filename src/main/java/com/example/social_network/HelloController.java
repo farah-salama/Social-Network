@@ -18,8 +18,8 @@ public class HelloController {
     private TextArea txtBox;
 
     @FXML
-    private Label label;
-@FXML
+    private Label output_label;
+    @FXML
     protected void onProcessButtonClick(ActionEvent event) throws IOException {
         //System.out.println(txtBox.getText());
         String userInput = txtBox.getText();
@@ -30,8 +30,8 @@ public class HelloController {
             xmlFile = new XmlFile(new String(Files.readAllBytes(Paths.get(userInput))));
         }
         String errors = xmlFile.validateFile();
-        if(errors.isEmpty()) label.setText("No Errors Detected!");
-        else label.setText("Errors Detected:\n" + errors);
+        if(errors.isEmpty()) output_label.setText("No Errors Detected!");
+        else output_label.setText("Errors Detected:\n" + errors);
     }
     @FXML
     protected void OnCompressButtonClick (ActionEvent event) {
@@ -65,5 +65,35 @@ public class HelloController {
 
     }
 
+    @FXML
+    protected void OnErrorsButtonClick (ActionEvent event) throws IOException {
+        String userInput = txtBox.getText();
+        XmlFile xmlFile;
+        if (userInput.trim().startsWith("<")) {
+            xmlFile = new XmlFile(userInput);
+        }else{
+            xmlFile = new XmlFile(new String(Files.readAllBytes(Paths.get(userInput))));
+        }
+        String newFile = xmlFile.correctErrors();
+        output_label.setText(Prettifying.prettify(newFile));
+        File file = new File("output.xml");
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            byte[] bytes = Prettifying.prettify(newFile).getBytes();
+            fos.write(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    protected void OnNewFileButtonClick (ActionEvent event) {
+        /*File file = new File("output.xml");
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            byte[] bytes = Prettifying.prettify(newFile).getBytes();
+            fos.write(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+    }
 }
