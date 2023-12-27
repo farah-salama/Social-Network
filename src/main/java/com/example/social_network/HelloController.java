@@ -12,7 +12,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class HelloController {
-    
+    private String output_text;
    
     @FXML
     private TextArea txtBox;
@@ -75,25 +75,19 @@ public class HelloController {
             xmlFile = new XmlFile(new String(Files.readAllBytes(Paths.get(userInput))));
         }
         String newFile = xmlFile.correctErrors();
-        output_label.setText(Prettifying.prettify(newFile));
-        File file = new File("output.xml");
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            byte[] bytes = Prettifying.prettify(newFile).getBytes();
-            fos.write(bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        newFile = Prettifying.prettify(newFile);
+        output_label.setText(newFile);
+        output_text = newFile;
     }
 
     @FXML
     protected void OnNewFileButtonClick (ActionEvent event) {
-        /*File file = new File("output.xml");
+        File file = new File("output.xml");
         try (FileOutputStream fos = new FileOutputStream(file)) {
-            byte[] bytes = Prettifying.prettify(newFile).getBytes();
+            byte[] bytes = Prettifying.prettify(output_text).getBytes();
             fos.write(bytes);
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-
+        }
     }
 }
