@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 
 
 public class GraphView extends Application {
+    private String filePath;
+    public void setFilePath(String filePath){
+        this.filePath = filePath;
+    }
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("graph.fxml"));
@@ -16,7 +20,7 @@ public class GraphView extends Application {
         // Set the social network data in the controller
         GraphViewController controller = loader.getController();
 
-        controller.setSocialNetwork(xmlParser.createNetworkFromXML("F:\\college\\1st Semester\\ds\\Project social network\\sample.xml"));
+        controller.setSocialNetwork(xmlParser.createNetworkFromXML(filePath));
         controller.initialize();
 
 
@@ -26,7 +30,7 @@ public class GraphView extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args, String filePath) {
         launch();
     }
 }
