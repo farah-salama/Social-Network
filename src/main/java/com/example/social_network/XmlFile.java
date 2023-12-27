@@ -75,7 +75,7 @@ public class XmlFile {
     public String correctErrors() throws IOException {
         BufferedReader br = new BufferedReader(new StringReader(this.fileContent));
         String line;
-        String output = null;
+        String output = "";
         while ((line = br.readLine()) != null) {
             Pattern pattern = Pattern.compile("^\\s*<(.*)>(.*)</(.*)>$");
             Matcher matcher = pattern.matcher(line);
