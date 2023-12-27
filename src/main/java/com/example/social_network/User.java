@@ -1,4 +1,4 @@
-package org.example.graphvisualization;
+package com.example.social_network;
 
 import java.util.List;
 import java.util.Objects;
@@ -7,10 +7,10 @@ public class User {
     private int id = 0;
     private String name;
     private List<Post> posts;
-    private List<org.example.graphvisualization.User> followers;
+    private List<User> followers;
 
     // constructors, getters, setters
-    public User(int id, String name, List<Post> posts, List<org.example.graphvisualization.User> followers) {
+    public User(int id, String name, List<Post> posts, List<User> followers) {
         this.id = id;  //to guarantee that each user has a unique id
         this.name = name;
         this.posts = posts;

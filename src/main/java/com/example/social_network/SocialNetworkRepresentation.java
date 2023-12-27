@@ -1,4 +1,4 @@
-package org.example.graphvisualization;
+package com.example.social_network;
 
 import java.util.ArrayList;
 import java.util.HashMap;

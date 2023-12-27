@@ -1,5 +1,5 @@
 
-package org.example.graphvisualization;
+package com.example.social_network;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

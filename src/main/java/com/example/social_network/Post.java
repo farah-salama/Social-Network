@@ -1,4 +1,4 @@
-package org.example.graphvisualization;
+package com.example.social_network;
 
 import java.util.List;
 
