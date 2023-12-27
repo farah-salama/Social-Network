@@ -39,13 +39,51 @@ public class HelloController {
     }
     @FXML
     protected void OnCompressButtonClick (ActionEvent event) {
+        String input = txtBox.getText();
+        File outputFile = promptUserForOutputFile(); // Get output file from user
+                if (input.trim().startsWith("<")) {
+                     HuffmanCompression.compress(input,outputFile);
+                }else {
+                    File inputFile = new File(input);
+                    HuffmanCompression.compress(inputFile, outputFile);
+                }
+                    InputStream InputStream = System.in;
+                    try {
+                        System.setIn(new FileInputStream(outputFile));
+                    } catch (FileNotFoundException ee) {
+                        ee.printStackTrace();
+                    }
+                    String output= BitInputStream.readString();
+                    BitInputStream.close();
+                    System.setIn(InputStream);
+                    output_label.setText(output);
+                }
+    private File promptUserForOutputFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Output File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Compressed XML Files", "*.xml.huff"));
+        return fileChooser.showSaveDialog(new Stage());
     }
 
           
     @FXML
     protected void OnDecompressButtonClick (ActionEvent event) {
        
-    
+     //String input = txtBox.getText(); // Get input from the text box
+      //  File inputFile = new File(input); // Assume input is a file path
+        File inputFile = promptUserForOutputFile();
+        File outputFile = promptUserForOutputFile(); // Prompt for output file
+
+        try {
+            HuffmanCompression.decompress(inputFile,outputFile); // Perform decompression
+            output_label.setText("Decompression successful!");
+            // Optionally, display decompressed content on output_label:
+            String decompressedText = Files.readString(outputFile.toPath());
+            output_label.setText(decompressedText);
+        } catch (IOException e) {
+            output_label.setText("Decompression failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
