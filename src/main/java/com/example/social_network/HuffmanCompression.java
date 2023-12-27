@@ -72,7 +72,19 @@ public class HuffmanCompression {
 
         huffmanEncode(s);
     }
+    public static void compress(String str, File output){
 
+        PrintStream OutStream = System.out;
+
+        try {
+            System.setOut(new PrintStream(output));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        huffmanEncode(str);
+        System.setOut(OutStream);
+    }
     public static void compress(File input, File output)
     {
         InputStream InStream = System.in;
