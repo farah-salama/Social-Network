@@ -73,7 +73,7 @@ public class XmlFile {
     }
 
     public String correctErrors() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(this.fileContent));
+        BufferedReader br = new BufferedReader(new StringReader(this.fileContent));
         String line;
         String output = null;
         while ((line = br.readLine()) != null) {
