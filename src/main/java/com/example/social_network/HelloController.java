@@ -20,6 +20,8 @@ public class HelloController {
     @FXML
     private Label output_label;
     @FXML
+    private Label input_label;
+    @FXML
     protected void onProcessButtonClick(ActionEvent event) throws IOException {
         //System.out.println(txtBox.getText());
         String userInput = txtBox.getText();
@@ -27,8 +29,10 @@ public class HelloController {
         if (userInput.trim().startsWith("<")) {
             xmlFile = new XmlFile(userInput);
         }else{
-            xmlFile = new XmlFile(new String(Files.readAllBytes(Paths.get(userInput))));
+            userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+            xmlFile = new XmlFile(userInput);
         }
+        input_label.setText(userInput);
         String errors = xmlFile.validateFile();
         if(errors.isEmpty()) output_label.setText("No Errors Detected!");
         else output_label.setText("Errors Detected:\n" + errors);
@@ -72,8 +76,10 @@ public class HelloController {
         if (userInput.trim().startsWith("<")) {
             xmlFile = new XmlFile(userInput);
         }else{
-            xmlFile = new XmlFile(new String(Files.readAllBytes(Paths.get(userInput))));
+            userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+            xmlFile = new XmlFile(userInput);
         }
+        input_label.setText(userInput);
         String newFile = xmlFile.correctErrors();
         newFile = Prettifying.prettify(newFile);
         output_label.setText(newFile);
