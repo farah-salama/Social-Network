@@ -64,9 +64,23 @@ public class HelloController {
 
     }
     @FXML
-    protected void OnGraphButtonClick (ActionEvent event) {
-       
+    protected void OnGraphButtonClick (ActionEvent event) throws Exception {
+        String userInput = txtBox.getText();
+        if (userInput.trim().startsWith("<")) {
+            output_label.setText("Please Enter a File Path.");
+        }else{
+            GraphView graphView = new GraphView();
+            // Get the stage of the GraphView object
+            Stage graphStage = new Stage();
+            graphView.setFilePath(userInput);
+            graphView.start(graphStage);
 
+            // Show the stage of the GraphView object
+            graphStage.show();
+            userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+            output_label.setText("");
+        }
+        input_label.setText(userInput);
     }
 
     @FXML
