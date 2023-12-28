@@ -141,6 +141,34 @@ public class HelloController {
         output_label.setText(newFile);
         output_text = newFile;
     }
+     @FXML
+    protected void OnPostSearchButtonClick (ActionEvent event) {
+       try {
+           String userInput = txtBox.getText();
+String filePath;
+        XmlFile xmlFile;
+        if (userInput.trim().startsWith("<")) {
+
+            xmlFile = new XmlFile(userInput);
+            File file = new File("post.xml");
+            filePath="post.xml";
+            FileOutputStream fos = new FileOutputStream(file) ;
+                byte[] bytes = Prettifying.prettify(txtBox.getText()).getBytes();
+                fos.write(bytes);
+        }else{
+filePath=userInput;
+         userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+            xmlFile = new XmlFile(userInput);
+        }
+           input_label.setText(userInput);
+       String output= PostSearch.convertPostsToString(PostSearch.postSearch(filePath,"hello"));
+       output_label.setText(output);
+       }
+       catch (Exception e){
+           output_label.setText(e.getMessage());
+           e.printStackTrace();
+       }
+    }
 
     @FXML
     protected void OnNewFileButtonClick (ActionEvent event) {
