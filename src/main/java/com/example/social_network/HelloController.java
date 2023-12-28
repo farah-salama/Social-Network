@@ -120,10 +120,10 @@ public class HelloController {
                 graphView.setFilePath("input.xml");
                 graphView.start(graphStage);
                 graphStage.show();
-                infile.delete();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            infile.delete();
         }else{
             GraphView graphView = new GraphView();
             Stage graphStage = new Stage();
