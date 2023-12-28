@@ -16,6 +16,8 @@ public class HelloController {
    
     @FXML
     private TextArea txtBox;
+    @FXML
+    private TextArea searchBox;
 
     @FXML
     private Label output_label;
