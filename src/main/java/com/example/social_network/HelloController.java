@@ -111,19 +111,28 @@ public class HelloController {
     protected void OnGraphButtonClick (ActionEvent event) throws Exception {
         String userInput = txtBox.getText();
         if (userInput.trim().startsWith("<")) {
-            output_label.setText("Please Enter a File Path.");
+            File infile = new File("input.xml");
+            try (FileOutputStream fos = new FileOutputStream(infile)) {
+                byte[] bytes = userInput.getBytes();
+                fos.write(bytes);
+                GraphView graphView = new GraphView();
+                Stage graphStage = new Stage();
+                graphView.setFilePath("input.xml");
+                graphView.start(graphStage);
+                graphStage.show();
+                infile.delete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else{
             GraphView graphView = new GraphView();
-            // Get the stage of the GraphView object
             Stage graphStage = new Stage();
             graphView.setFilePath(userInput);
             graphView.start(graphStage);
-
-            // Show the stage of the GraphView object
             graphStage.show();
             userInput = new String(Files.readAllBytes(Paths.get(userInput)));
-            output_label.setText("");
         }
+        output_label.setText("\tDisplaying Graph...");
         input_label.setText(userInput);
     }
 
