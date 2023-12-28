@@ -44,23 +44,23 @@ public class HelloController {
         input_label.setText(input);
         output_label.setText("Choose file path to save the compressed version,please");
         File outputFile = promptUserForOutputFile(); // Get output file from user
-                if (input.trim().startsWith("<")) {
-                     HuffmanCompression.compress(input,outputFile);
-                }else {
-                    File inputFile = new File(input);
-                    HuffmanCompression.compress(inputFile, outputFile);
-                }
-                    InputStream InputStream = System.in;
-                    try {
-                        System.setIn(new FileInputStream(outputFile));
-                    } catch (FileNotFoundException ee) {
-                        ee.printStackTrace();
-                    }
-                    String output= BitInputStream.readString();
-                    BitInputStream.close();
-                    System.setIn(InputStream);
-                    output_label.setText(output);
-                }
+        if (input.trim().startsWith("<")) {
+             HuffmanCompression.compress(input,outputFile);
+        }else {
+            File inputFile = new File(input);
+            HuffmanCompression.compress(inputFile, outputFile);
+        }
+        InputStream InputStream = System.in;
+        try {
+            System.setIn(new FileInputStream(outputFile));
+        } catch (FileNotFoundException ee) {
+            ee.printStackTrace();
+        }
+        String output= BitInputStream.readString();
+        BitInputStream.close();
+        System.setIn(InputStream);
+        output_label.setText(output);
+    }
     private File promptUserForOutputFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Output File");
@@ -141,32 +141,31 @@ public class HelloController {
         output_label.setText(newFile);
         output_text = newFile;
     }
-     @FXML
+    @FXML
     protected void OnPostSearchButtonClick (ActionEvent event) {
        try {
-           String userInput = txtBox.getText();
-String filePath;
-        XmlFile xmlFile;
-        if (userInput.trim().startsWith("<")) {
-
-            xmlFile = new XmlFile(userInput);
-            File file = new File("post.xml");
-            filePath="post.xml";
-            FileOutputStream fos = new FileOutputStream(file) ;
+            String userInput = txtBox.getText();
+            String filePath;
+            XmlFile xmlFile;
+            if (userInput.trim().startsWith("<")) {
+                xmlFile = new XmlFile(userInput);
+                File file = new File("post.xml");
+                filePath="post.xml";
+                FileOutputStream fos = new FileOutputStream(file) ;
                 byte[] bytes = Prettifying.prettify(txtBox.getText()).getBytes();
                 fos.write(bytes);
-        }else{
-filePath=userInput;
-         userInput = new String(Files.readAllBytes(Paths.get(userInput)));
-            xmlFile = new XmlFile(userInput);
-        }
-           input_label.setText(userInput);
-       String output= PostSearch.convertPostsToString(PostSearch.postSearch(filePath,"hello"));
-       output_label.setText(output);
+            }else{
+                filePath=userInput;
+                userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+                xmlFile = new XmlFile(userInput);
+            }
+            input_label.setText(userInput);
+            String output= PostSearch.convertPostsToString(PostSearch.postSearch(filePath,"hello"));
+            output_label.setText(output);
        }
        catch (Exception e){
-           output_label.setText(e.getMessage());
-           e.printStackTrace();
+            output_label.setText(e.getMessage());
+            e.printStackTrace();
        }
     }
 
