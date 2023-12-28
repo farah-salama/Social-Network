@@ -38,8 +38,11 @@ public class HelloController {
         else output_label.setText("Errors Detected:\n" + errors);
     }
     @FXML
-    protected void OnCompressButtonClick (ActionEvent event) {
+    protected void OnCompressButtonClick (ActionEvent event) throws IOException {
         String input = txtBox.getText();
+        input = new String(Files.readAllBytes(Paths.get(input)));
+        input_label.setText(input);
+        output_label.setText("Choose file path to save the compressed version,please");
         File outputFile = promptUserForOutputFile(); // Get output file from user
                 if (input.trim().startsWith("<")) {
                      HuffmanCompression.compress(input,outputFile);
@@ -67,10 +70,11 @@ public class HelloController {
 
           
     @FXML
-    protected void OnDecompressButtonClick (ActionEvent event) {
+    protected void OnDecompressButtonClick (ActionEvent event)  {
        
      //String input = txtBox.getText(); // Get input from the text box
       //  File inputFile = new File(input); // Assume input is a file path
+        output_label.setText("Choose the compressed file path and file path to save the decompressed version ,please");
         File inputFile = promptUserForOutputFile();
         File outputFile = promptUserForOutputFile(); // Prompt for output file
 
