@@ -181,6 +181,11 @@ public class HelloController {
     }
 
     @FXML
+    protected void OnNetworkAnalysisButtonClick (ActionEvent event) {
+
+    }
+
+    @FXML
     protected void OnNewFileButtonClick (ActionEvent event) {
         File file = new File("output.xml");
         try (FileOutputStream fos = new FileOutputStream(file)) {
