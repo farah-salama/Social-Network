@@ -13,7 +13,8 @@ import javafx.stage.Stage;
 
 public class HelloController {
     private String output_text;
-   
+    private String compressed_text;
+
     @FXML
     private TextArea txtBox;
     @FXML
@@ -42,13 +43,14 @@ public class HelloController {
     @FXML
     protected void OnCompressButtonClick (ActionEvent event) throws IOException {
         String input = txtBox.getText();
-        input = new String(Files.readAllBytes(Paths.get(input)));
-        input_label.setText(input);
         output_label.setText("Choose file path to save the compressed version,please");
         File outputFile = promptUserForOutputFile(); // Get output file from user
-        if (input.trim().startsWith("<")) {
-             HuffmanCompression.compress(input,outputFile);
+        if ((input.trim().startsWith("<"))|(input.trim().startsWith("{"))) {
+            input_label.setText(input);
+            HuffmanCompression.compress(input,outputFile);
         }else {
+           String text_input = new String(Files.readAllBytes(Paths.get(input)));
+            input_label.setText(text_input);
             File inputFile = new File(input);
             HuffmanCompression.compress(inputFile, outputFile);
         }
@@ -62,20 +64,22 @@ public class HelloController {
         BitInputStream.close();
         System.setIn(InputStream);
         output_label.setText(output);
+        compressed_text=output;
     }
     private File promptUserForOutputFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Output File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Compressed XML Files", "*.xml.huff"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Compressed XML Files", "*.txt"));
         return fileChooser.showSaveDialog(new Stage());
     }
 
-          
+
     @FXML
     protected void OnDecompressButtonClick (ActionEvent event)  {
-       
-     //String input = txtBox.getText(); // Get input from the text box
-      //  File inputFile = new File(input); // Assume input is a file path
+
+        //String input = txtBox.getText(); // Get input from the text box
+        //  File inputFile = new File(input); // Assume input is a file path
+        input_label.setText(compressed_text);
         output_label.setText("Choose the compressed file path and file path to save the decompressed version ,please");
         File inputFile = promptUserForOutputFile();
         File outputFile = promptUserForOutputFile(); // Prompt for output file
@@ -94,17 +98,17 @@ public class HelloController {
 
     @FXML
     protected void OnFormatButtonClick (ActionEvent event) {
-       
+
     }
 
     @FXML
     protected void OnMinifyButtonClick (ActionEvent event) {
-       
+
 
     }
     @FXML
     protected void OnJSONButtonClick (ActionEvent event) {
-       
+
 
     }
     @FXML
@@ -154,7 +158,7 @@ public class HelloController {
     }
     @FXML
     protected void OnPostSearchButtonClick (ActionEvent event) {
-       try {
+        try {
             String userInput = txtBox.getText();
             String filePath;
             XmlFile xmlFile;
@@ -173,11 +177,11 @@ public class HelloController {
             input_label.setText(userInput);
             String output= PostSearch.convertPostsToString(PostSearch.postSearch(filePath,"hello"));
             output_label.setText(output);
-       }
-       catch (Exception e){
+        }
+        catch (Exception e){
             output_label.setText(e.getMessage());
             e.printStackTrace();
-       }
+        }
     }
 
     @FXML
