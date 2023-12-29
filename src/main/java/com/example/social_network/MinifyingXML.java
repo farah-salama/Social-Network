@@ -7,7 +7,7 @@ import java.io.*;
  *
  * @author Mariz
  */
-public class Minifying {
+public class MinifyingXML {
   
    public static void Minifying(String INPUT_FILE_PATH,String OUTPUT_FILE_PATH) throws Exception
     {
@@ -55,6 +55,7 @@ public class Minifying {
             inputStream.close();
             outputStream.close();
     }
+/*
     public static void main(String[] args) throws Exception {
         try {
             
@@ -67,6 +68,8 @@ public class Minifying {
             System.err.println("Error: " + e.getMessage());
         }
     }
+ */
+  
 }
    
 /* Another Trial */
