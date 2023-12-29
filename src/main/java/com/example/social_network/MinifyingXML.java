@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.example.social_network;
 
 import java.util.*;
@@ -10,15 +7,15 @@ import java.io.*;
  *
  * @author Mariz
  */
-public class MinifyingXML {
+public class Minifying {
   
    public static void Minifying(String INPUT_FILE_PATH,String OUTPUT_FILE_PATH) throws Exception
     {
         
          File inputFile = new File(INPUT_FILE_PATH);
 
-            // Make sure that the input file is an aml file
-            if (!inputFile.getPath().endsWith(".xml")) {
+           // Make sure that the input file is an xml file or JSON file (to be used before compressing)
+            if (!inputFile.getPath().endsWith(".xml") && !inputFile.getPath().endsWith(".json")) {
                 throw new Exception("Invalid input file");
             }
 
