@@ -17,18 +17,33 @@ public class AnalysisController {
 
     @FXML
     protected void OnMostActiveButtonClick (ActionEvent event) {
-        
+        output_label.setText(SocialNetworkAnalysis.theMostActiveUser());
     }
     @FXML
     protected void OnMostInfluentialButtonClick (ActionEvent event) {
-
+        String str = "";
+        for (String user:
+                SocialNetworkAnalysis.theMostInfluencerUsers()) {
+            str += user + '\n';
+        }
+        output_label.setText(str);
     }
     @FXML
     protected void OnMutualButtonClick (ActionEvent event) {
-
+        String str = "";
+        for (String user:
+                SocialNetworkAnalysis.getMutualFollowers(user1.getText(),user2.getText())) {
+            str += user + '\n';
+        }
+        output_label.setText(str);
     }
     @FXML
     protected void OnSuggestButtonClick (ActionEvent event) {
-
+        String str = "";
+        for (String user:
+                SocialNetworkAnalysis.suggestedFollowers(user_suggest.getText())) {
+            str += user + '\n';
+        }
+        output_label.setText(str);
     }
 }

@@ -10,9 +10,11 @@ import java.util.Set;
  * @author Mariz
  */
 public class SocialNetworkAnalysis {
-    
-/* Description: get the most influencer user (has the most followers) */
-public static String[]theMostInfluencerUsers(String filePath) {
+    static String filePath;
+
+
+    /* Description: get the most influencer user (has the most followers) */
+public static String[]theMostInfluencerUsers() {
     SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);
 
     List<User> users = xmlParser.parse(filePath);
@@ -50,7 +52,7 @@ public static String[]theMostInfluencerUsers(String filePath) {
     /* Description: get  the most active user (connected to lots of users)
      using Degree Centrality
     */
-    public static String theMostActiveUser(String filePath) {
+    public static String theMostActiveUser() {
     SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);     
     List<User> users = xmlParser.parse(filePath);
 
@@ -92,7 +94,7 @@ public static String[]theMostInfluencerUsers(String filePath) {
     }
     
     //Description: get the mutual followers between 2 users
-    public static String[] getMutualFollowers(String user1Name, String user2Name,String filePath) {
+    public static String[] getMutualFollowers(String user1Name, String user2Name) {
         
         SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);     
         List<User> users = xmlParser.parse(filePath);
@@ -150,7 +152,7 @@ public static String[]theMostInfluencerUsers(String filePath) {
     }
     
     //for each user, suggest a list of users to follow (the followers of his followers)
-    public static String[] suggestedFollowers(String userName,String filePath)
+    public static String[] suggestedFollowers(String userName)
     {
         SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);     
         List<User> users = xmlParser.parse(filePath);

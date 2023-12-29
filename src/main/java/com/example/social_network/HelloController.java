@@ -193,8 +193,32 @@ public class HelloController {
     }
 
     @FXML
-    protected void OnNetworkAnalysisButtonClick (ActionEvent event) {
-
+    protected void OnNetworkAnalysisButtonClick (ActionEvent event) throws IOException {
+        String userInput = txtBox.getText();
+        if (userInput.trim().startsWith("<")) {
+            File infile = new File("input.xml");
+            try (FileOutputStream fos = new FileOutputStream(infile)) {
+                byte[] bytes = userInput.getBytes();
+                fos.write(bytes);
+                AnalysisApplication analysis = new AnalysisApplication();
+                Stage AnalysisStage = new Stage();
+                SocialNetworkAnalysis.filePath = "input.xml";
+                analysis.start(AnalysisStage);
+                AnalysisStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //infile.delete();
+        }else{
+            AnalysisApplication analysis = new AnalysisApplication();
+            Stage AnalysisStage = new Stage();
+            SocialNetworkAnalysis.filePath = userInput;
+            analysis.start(AnalysisStage);
+            AnalysisStage.show();
+            userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+        }
+        output_label.setText("Displaying Network Analysis App...");
+        input_label.setText(userInput);
     }
 
     @FXML
