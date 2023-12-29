@@ -9,7 +9,7 @@ import java.io.*;
  */
 public class MinifyingXML {
   
-   public static void Minifying(String INPUT_FILE_PATH,String OUTPUT_FILE_PATH) throws Exception
+   public static String Minifying(String INPUT_FILE_PATH) throws Exception
     {
         
          File inputFile = new File(INPUT_FILE_PATH);
@@ -48,21 +48,21 @@ public class MinifyingXML {
                     stringBuilder.append(line); 
                 }
             }
-
-            FileOutputStream outputStream = new FileOutputStream(OUTPUT_FILE_PATH);
+            return stringBuilder.toString();
+            /*FileOutputStream outputStream = new FileOutputStream(OUTPUT_FILE_PATH);
             outputStream.write(stringBuilder.toString().getBytes());
 
             inputStream.close();
-            outputStream.close();
+            outputStream.close();*/
     }
 /*
     public static void main(String[] args) throws Exception {
         try {
             
             String INPUT_FILE_PATH = "C:\\Users\\Envy\\Desktop\\Fall23\\Data Structure and Algorithms\\Project\\input_sample.xml";
-            String OUTPUT_FILE_PATH = "C:\\Users\\Envy\\Desktop\\Fall23\\Data Structure and Algorithms\\Project\\SampleOut.xml";
+            //String OUTPUT_FILE_PATH = "C:\\Users\\Envy\\Desktop\\Fall23\\Data Structure and Algorithms\\Project\\SampleOut.xml";
             
-            Minifying(INPUT_FILE_PATH,OUTPUT_FILE_PATH);
+            String result = Minifying(INPUT_FILE_PATH);
         } 
         catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
