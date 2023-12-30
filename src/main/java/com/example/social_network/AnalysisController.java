@@ -16,12 +16,8 @@ public class AnalysisController {
     private Label output_label;
 
     @FXML
-    protected void OnMostActiveButtonClick (ActionEvent event) {
-        output_label.setText(SocialNetworkAnalysis.theMostActiveUser());
-    }
-    @FXML
     protected void OnMostInfluentialButtonClick (ActionEvent event) {
-        String str[] = SocialNetworkAnalysis.theMostInfluencerUsers());
+        String str[] = SocialNetworkAnalysis.theMostInfluentialUsers());
         for (String userName: str){
              if(userName==null)
              {
@@ -29,11 +25,62 @@ public class AnalysisController {
              }
              else
              {
-                 output label.setText(userName);
+                 output_label.setText(userName);
              }
         }
     }
+    
+     @FXML
+    protected void OnMostActiveButtonClick (ActionEvent event) {
+        String str[] = SocialNetworkAnalysis.theMostActiveUser();
+        for (String userName: str){
+             if(userName==null)
+             {
+                 break;
+             }
+             else
+             {
+                 output_label.setText(userName);
+             }
+        }
+    }
+    
+    @FXML
+    protected void OnMutualButtonClick (ActionEvent event) {
+        String str[] =  SocialNetworkAnalysis.suggestedFollowers(Integer.parseInt(user_suggest.getText()));
+        for (String userName: str){
+             if(userName==null)
+             {
+                 break;
+             }
+             else
+             {
+                 output_label.setText(userName);
+             }
+        }
+    }
+    
+    @FXML
+    protected void OnSuggestButtonClick (ActionEvent event) {
+        String str[] = SocialNetworkAnalysis.getMutualFollowers(Integer.parseInt(user1.getText()),Integer.parseInt(user2.getText()));
+        for (String userName: str){
+             if(userName==null)
+             {
+                 break;
+             }
+             else
+             {
+                 output_label.setText(userName);
+             }
+        }
+    }
+    
     /*
+    @FXML
+    protected void OnMostActiveButtonClick (ActionEvent event) {
+        output_label.setText(SocialNetworkAnalysis.theMostActiveUser());
+    }
+    
     protected void OnMostInfluentialButtonClick (ActionEvent event) {
         String str = "";
         for (String user:
@@ -42,7 +89,7 @@ public class AnalysisController {
         }
         output_label.setText(str);
     }
-    */
+    
     @FXML
     protected void OnMutualButtonClick (ActionEvent event) {
         String str = "";
@@ -61,4 +108,5 @@ public class AnalysisController {
         }
         output_label.setText(str);
     }
+    */
 }
