@@ -12,7 +12,6 @@ import java.util.Set;
 public class SocialNetworkAnalysis {
     static String filePath;
 
-
     /* Description: get the most influencer user (has the most followers) */
 public static String[]theMostInfluencerUsers() {
     SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);
@@ -94,7 +93,7 @@ public static String[]theMostInfluencerUsers() {
     }
     
     //Description: get the mutual followers between 2 users
-    public static String[] getMutualFollowers(String user1Name, String user2Name) {
+   public static String[] getMutualFollowers(int user1ID, int user2ID) {
         
         SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);     
         List<User> users = xmlParser.parse(filePath);
@@ -105,13 +104,13 @@ public static String[]theMostInfluencerUsers() {
         
         for(User user: users)
         {
-            if(user1Name.equals(user.getName()))
+            if(user1ID==user.getId())
             {
               user1=new User(user.getId(), user.getName(), user.getPosts(), user.getFollowers()); 
               done++;
             }
             
-            if(user2Name.equals(user.getName()))
+            if(user2ID==user.getId())
             {
               user2=new User(user.getId(), user.getName(), user.getPosts(), user.getFollowers()); 
               done++;
@@ -123,11 +122,11 @@ public static String[]theMostInfluencerUsers() {
        
         if(user1==null)
         {
-           return new String[]{user1Name+" isn't found"};
+           return new String[]{user1ID+" isn't found"};
         }
         if(user2==null)
         {
-            return new String[]{user2Name+" isn't found"};
+            return new String[]{user2ID+" isn't found"};
         }
       
         List<User> followersUser1 = user1.getFollowers();
@@ -152,7 +151,7 @@ public static String[]theMostInfluencerUsers() {
     }
     
     //for each user, suggest a list of users to follow (the followers of his followers)
-    public static String[] suggestedFollowers(String userName)
+    public static String[] suggestedFollowers(int userID)
     {
         SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);     
         List<User> users = xmlParser.parse(filePath);
@@ -160,7 +159,7 @@ public static String[]theMostInfluencerUsers() {
         // Searching for the input user
         for(User user: users)
         {
-            if(userName.equals(user.getName()))
+            if(userID==user.getId())
             {
               inputUser=new User(user.getId(), user.getName(), user.getPosts(), user.getFollowers()); 
             }
@@ -198,6 +197,7 @@ public static String[]theMostInfluencerUsers() {
         
         return suggestedUsersNames;
     }
+    
     
     /*
     public static void main(String[] args) {
