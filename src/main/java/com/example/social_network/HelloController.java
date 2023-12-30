@@ -127,9 +127,23 @@ public class HelloController {
 
     @FXML
     protected void OnMinifyButtonClick (ActionEvent event) {
-
-
+    String userInput = txtBox.getText();
+    XmlFile xmlFile;
+   if (userInput.trim().startsWith("<")) 
+    {
+     xmlFile = new XmlFile(userInput);
     }
+   else
+    {
+     userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+     xmlFile = new XmlFile(userInput);
+    }        
+    input_label.setText(userInput);
+    String newFile = MinifyingXML.Minifying(userInput);
+    output_label.setText(newFile);
+    output_text = newFile;
+    }
+    
     @FXML
      protected void OnJSONButtonClick (ActionEvent event) {
         String userInput = txtBox.getText();
