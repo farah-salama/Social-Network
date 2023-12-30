@@ -109,15 +109,11 @@ public class HelloController {
     @FXML
     protected void OnFormatButtonClick (ActionEvent event) throws IOException {
         String userInput = txtBox.getText();
-        XmlFile xmlFile;
-        if (userInput.trim().startsWith("<")) {
-            xmlFile = new XmlFile(userInput);
-        }else{
+
+        if (!userInput.trim().startsWith("<")) {
             userInput = new String(Files.readAllBytes(Paths.get(userInput)));
-            xmlFile = new XmlFile(userInput);
         }
         input_label.setText(userInput);
-        //String newFile = xmlFile.correctErrors();
         String newFile = Prettifying.prettify(userInput);
         output_label.setText(newFile);
         output_text = newFile;
@@ -126,6 +122,7 @@ public class HelloController {
 
 
     @FXML
+<<<<<<< Updated upstream
     protected void OnMinifyButtonClick (ActionEvent event) {
     String userInput = txtBox.getText();
     XmlFile xmlFile;
@@ -144,21 +141,33 @@ public class HelloController {
     output_text = newFile;
     }
     
+=======
+    protected void OnMinifyButtonClick (ActionEvent event) throws Exception {
+        String userInput = txtBox.getText();
+        if (!userInput.trim().startsWith("<")) {
+            userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+        }
+        undoStack.push(userInput);
+        input_label.setText(userInput);
+        String newFile = MinifyingXML.Minifying(userInput);
+        output_label.setText(newFile);
+        output_text = newFile;
+        undoStack.push(newFile);
+    }
+
+>>>>>>> Stashed changes
     @FXML
      protected void OnJSONButtonClick (ActionEvent event) {
         String userInput = txtBox.getText();
-        XmlFile xmlFile;
         XMLtoJSON xmlTOjson=new XMLtoJSON();
-        if (userInput.trim().startsWith("<")) {
-            xmlFile = new XmlFile(userInput);
-        }else{
+        if (!userInput.trim().startsWith("<")) {
             try {
                 userInput = new String(Files.readAllBytes(Paths.get(userInput)));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            xmlFile = new XmlFile(userInput);
         }
+        undoStack.push(userInput);
         input_label.setText(userInput);
         Node root=xmlTOjson.parseXML(userInput);
         StringBuilder JsonBuilder = new StringBuilder();
@@ -169,16 +178,14 @@ public class HelloController {
 
         output_label.setText(newFile);
         output_text = newFile;
+        undoStack.push(newFile);
     }
+
     @FXML
     protected void undoButtonClick (ActionEvent event) throws IOException {
         String userInput = txtBox.getText();
-        XmlFile xmlFile;
-        if (userInput.trim().startsWith("<")) {
-            xmlFile = new XmlFile(userInput);
-        }else{
+        if (!userInput.trim().startsWith("<")) {
             userInput = new String(Files.readAllBytes(Paths.get(userInput)));
-            xmlFile = new XmlFile(userInput);
         }
         input_label.setText(userInput);
         String newFile = UNDO_REDO.undoModification(userInput);
@@ -189,12 +196,8 @@ public class HelloController {
     @FXML
     protected void redoButtonClick (ActionEvent event) throws IOException {
         String userInput = txtBox.getText();
-        XmlFile xmlFile;
-        if (userInput.trim().startsWith("<")) {
-            xmlFile = new XmlFile(userInput);
-        }else{
+        if (!userInput.trim().startsWith("<")) {
             userInput = new String(Files.readAllBytes(Paths.get(userInput)));
-            xmlFile = new XmlFile(userInput);
         }
         input_label.setText(userInput);
         String newFile = UNDO_REDO.redoModification(userInput);
@@ -318,8 +321,9 @@ public class HelloController {
     protected void OnNewFileButtonClick (ActionEvent event) {
         File file = new File("output.xml");
         try (FileOutputStream fos = new FileOutputStream(file)) {
-            byte[] bytes = Prettifying.prettify(output_text).getBytes();
+            byte[] bytes = output_text.getBytes();
             fos.write(bytes);
+            output_label.setText("\tOutput Exported.");
         } catch (IOException e) {
             e.printStackTrace();
         }
