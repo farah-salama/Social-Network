@@ -47,7 +47,7 @@ public class AnalysisController {
     
     @FXML
     protected void OnMutualButtonClick (ActionEvent event) {
-        String str[] =  SocialNetworkAnalysis.suggestedFollowers(Integer.parseInt(user_suggest.getText()));
+        String str[] =   SocialNetworkAnalysis.getMutualFollowers(Integer.parseInt(user1.getText()),Integer.parseInt(user2.getText()));
         for (String userName: str){
              if(userName==null)
              {
@@ -62,7 +62,7 @@ public class AnalysisController {
     
     @FXML
     protected void OnSuggestButtonClick (ActionEvent event) {
-        String str[] = SocialNetworkAnalysis.getMutualFollowers(Integer.parseInt(user1.getText()),Integer.parseInt(user2.getText()));
+        String str[] = SocialNetworkAnalysis.suggestedFollowers(Integer.parseInt(user_suggest.getText()));
         for (String userName: str){
              if(userName==null)
              {
