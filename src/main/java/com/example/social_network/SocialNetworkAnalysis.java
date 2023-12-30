@@ -12,8 +12,8 @@ import java.util.Set;
 public class SocialNetworkAnalysis {
     static String filePath;
 
-    /* Description: get the most influencer user (has the most followers) */
-public static String[]theMostInfluencerUsers() {
+    /* Description: get the most influential users (has the most followers) as the file may contain more than one user of the same largest followers */
+public static String[]theMostInfluentialUsers() {
     SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);
 
     List<User> users = xmlParser.parse(filePath);
@@ -48,16 +48,18 @@ public static String[]theMostInfluencerUsers() {
     return mostInfluentialUserNames;
 }
 
-    /* Description: get  the most active user (connected to lots of users)
+    /* Description: get  the most active users (connected to lots of users) as the file may contain more than one user of the same largest connections 
      using Degree Centrality
     */
-    public static String theMostActiveUser() {
-    SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);     
+   public static String[] theMostActiveUsers() {
+    SocialNetworkRepresentation network = xmlParser.createNetworkFromXML(filePath);
     List<User> users = xmlParser.parse(filePath);
 
-    // To store the most active user (connected to lots of users)
-    User mostActiveUser = null;
-    int mostActiveUserID = 0;
+    // To store the most active users (connected to lots of users)
+    List<User> mostActiveUsers = new ArrayList<>();
+
+    // To store the most active users' IDs
+    List<Integer> mostActiveUserID = new ArrayList<>();
 
     // Making the adjacency matrix
     int[][] adjMatrix = new int[users.size()][users.size()];
@@ -82,15 +84,28 @@ public static String[]theMostInfluencerUsers() {
         // Normalize degree for degree centrality
         double degreeCentrality = (double) degree / (users.size() - 1); // Avoid division by zero
 
-        if (degreeCentrality > maxDegree) {
+        if ((degreeCentrality > maxDegree) || (degreeCentrality == maxDegree)) {
             maxDegree = degree;
-            mostActiveUserID = i;
+            mostActiveUserID.add(i + 1);
         }
     }
 
-    mostActiveUser = users.get(mostActiveUserID);
-    return mostActiveUser.getName();
+    String[] mostActiveUserNames = new String[mostActiveUserID.size()];
+
+    for (User user : users) {
+        for (int id : mostActiveUserID) {
+            if (user.getId() == id) {
+                mostActiveUsers.add(new User(user.getId(), user.getName(), user.getPosts(), user.getFollowers()));
+            }
+        }
     }
+    int index = 0;
+    for (User user : mostActiveUsers) {
+        mostActiveUserNames[index++] = user.getName();
+    }
+
+    return mostActiveUserNames;
+}
     
     //Description: get the mutual followers between 2 users
    public static String[] getMutualFollowers(int user1ID, int user2ID) {
@@ -199,12 +214,12 @@ public static String[]theMostInfluencerUsers() {
     }
     
     
-    /*
+   /*
     public static void main(String[] args) {
-        String filePath = "C:\\Users\\Envy\\Desktop\\Fall23\\Data Structure and Algorithms\\Project\\input_sample.xml";
+        String filePath = "C:\\Users\\Envy\\Desktop\\Fall23\\Data Structure and Algorithms\\Project\\input_sample2.xml";
         
         String[] mostInfluencial= new String[5];
-        mostInfluencial=theMostInfluencerUsers(filePath);
+        mostInfluencial=theMostInfluentialUsers(filePath);
         System.out.println("-The most influencer user:");
         for(String suggestedUser: mostInfluencial)
         {
@@ -215,13 +230,20 @@ public static String[]theMostInfluencerUsers() {
         
         //*******************************************************
         System.out.println("-The most Active user:");
-        System.out.println(theMostActiveUser(filePath));
+        String[]activeUsers= new String[5];
+        activeUsers=theMostActiveUsers(filePath);
+        for(String activeUser: activeUsers)
+        {
+            if(activeUser==null)
+                break;
+            System.out.println(activeUser);
+        }
         //*******************************************************
-        String name1="Yasser Ahmed";
-        String name2="Mohamed Sherif";
+       int id1=2;
+       int id2=3;
         String[] mutualFollowers = new String[5];
-        System.out.println("-The mutual Followers between "+name1+" and "+name2+":");
-        mutualFollowers=getMutualFollowers(name1,name2,filePath);
+        System.out.println("-The mutual Followers between "+id1+" and "+id2+":");
+        mutualFollowers=getMutualFollowers(id1,id2,filePath);
         for(String follower: mutualFollowers)
         {
             if(follower==null)
@@ -229,17 +251,18 @@ public static String[]theMostInfluencerUsers() {
             System.out.println(follower);
         }
         //*******************************************************
-        String name="Yasser Ahmed";
+        //String name="Yasser Ahmed";
+        int id=2;
         String[] suggestedFollowers = new String[5];
-        System.out.println("-The sugested followers for "+name+":");
-        suggestedFollowers=suggestedFollowers(name,filePath);
+        System.out.println("-The sugested followers for "+id+":");
+        suggestedFollowers=suggestedFollowers(id,filePath);
         for(String suggestedUser: suggestedFollowers)
         {
             if(suggestedUser==null)
                 break;
             System.out.println(suggestedUser);
         }
-}
-*/ 
+}   
+*/
     
 }
