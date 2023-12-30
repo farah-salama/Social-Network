@@ -48,12 +48,12 @@ public class MinifyingXML {
                     stringBuilder.append(line); 
                 }
             }
-            return stringBuilder.toString();
             /*FileOutputStream outputStream = new FileOutputStream(OUTPUT_FILE_PATH);
             outputStream.write(stringBuilder.toString().getBytes());
 
             inputStream.close();
             outputStream.close();*/
+      return stringBuilder.toString();
     }
 /*
     public static void main(String[] args) throws Exception {
