@@ -32,7 +32,7 @@ public class AnalysisController {
     
      @FXML
     protected void OnMostActiveButtonClick (ActionEvent event) {
-        String str[] = SocialNetworkAnalysis.theMostActiveUser();
+        String str[] = SocialNetworkAnalysis.theMostActiveUsers();
         for (String userName: str){
              if(userName==null)
              {
@@ -80,7 +80,8 @@ public class AnalysisController {
     protected void OnMostActiveButtonClick (ActionEvent event) {
         output_label.setText(SocialNetworkAnalysis.theMostActiveUser());
     }
-    
+
+    @FXML
     protected void OnMostInfluentialButtonClick (ActionEvent event) {
         String str = "";
         for (String user:
