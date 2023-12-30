@@ -9,35 +9,26 @@ import java.io.*;
  */
 public class MinifyingXML {
   
-   public static String Minifying(String INPUT_FILE_PATH) throws Exception
-    {
+  public static String Minifying(String inputFile) throws Exception {
+    
+    // Make sure that the input file is an xml file or JSON file (to be used before compressing)
+        if(!inputFile.startsWith("<") && !inputFile.startsWith("{"))
+        {
+            throw new Exception("Invalid input data");
+        }
         
-         File inputFile = new File(INPUT_FILE_PATH);
-
-           // Make sure that the input file is an xml file or JSON file (to be used before compressing)
-            if (!inputFile.getPath().endsWith(".xml") && !inputFile.getPath().endsWith(".json")) {
-                throw new Exception("Invalid input file");
-            }
-
-            // make sure that the file is not empty
-            if (inputFile.length()==0) {
-                throw new Exception("Invalid input file");
-            }
-
-            FileInputStream inputStream = new FileInputStream(inputFile);
-            StringBuilder stringBuilder = new StringBuilder();
-
-            int byteRead;
-            while ((byteRead = inputStream.read()) != -1) {
-                stringBuilder.append((char) byteRead);
-            }
-
-            String data = stringBuilder.toString();
-            Scanner scanner = new Scanner(data);
-
-            // Reuse StringBuilder for output
-            stringBuilder = new StringBuilder(); 
-            while (scanner.hasNextLine()) {
+         // make sure that the file is not empty
+        if(inputFile.length()==0)
+        {
+            throw new Exception("Invalid input data");
+        }
+        
+        // Using it for storing the output
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        Scanner scanner = new Scanner(inputFile);
+        
+         while (scanner.hasNextLine()) {
                 // Remove leading and trailing whitespace
                 String line = scanner.nextLine().trim();
                 // Replace multiple whitespaces with single space
@@ -48,28 +39,8 @@ public class MinifyingXML {
                     stringBuilder.append(line); 
                 }
             }
-            /*FileOutputStream outputStream = new FileOutputStream(OUTPUT_FILE_PATH);
-            outputStream.write(stringBuilder.toString().getBytes());
-
-            inputStream.close();
-            outputStream.close();*/
-      return stringBuilder.toString();
-    }
-/*
-    public static void main(String[] args) throws Exception {
-        try {
-            
-            String INPUT_FILE_PATH = "C:\\Users\\Envy\\Desktop\\Fall23\\Data Structure and Algorithms\\Project\\input_sample.xml";
-            //String OUTPUT_FILE_PATH = "C:\\Users\\Envy\\Desktop\\Fall23\\Data Structure and Algorithms\\Project\\SampleOut.xml";
-            
-            String result = Minifying(INPUT_FILE_PATH);
-        } 
-        catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
- */
-  
+         return stringBuilder.toString();
+    }  
 }
    
 /* Another Trial */
