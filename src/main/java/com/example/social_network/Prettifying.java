@@ -8,14 +8,17 @@ package com.example.social_network;
 /*import static com.mycompany.proj1.Proj1.redoStack;
 import static com.mycompany.proj1.Proj1.undoStack;*/
 
+import static com.example.social_network.UNDO_REDO.redoStack;
+import static com.example.social_network.UNDO_REDO.undoStack;
+
 public class Prettifying {
 
     private static int spacing = 0;
 
     public static String prettify(String xmlFile) {
         // Save the current state for undo
-        /* undoStack.push(xmlFile);
-        redoStack.clear(); */
+        undoStack.push(xmlFile);
+        //redoStack.clear();
 
         /* Check if the file is empty */
         if (xmlFile == null || xmlFile.length() == 0) {

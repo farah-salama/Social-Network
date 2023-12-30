@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import static com.example.social_network.UNDO_REDO.undoStack;
+
 public class HelloController {
     private String output_text;
     private String compressed_text;
@@ -47,10 +49,12 @@ public class HelloController {
         File outputFile = promptUserForOutputFile(); // Get output file from user
         if ((input.trim().startsWith("<"))|(input.trim().startsWith("{"))) {
             input_label.setText(input);
+            undoStack.push(input);
             HuffmanCompression.compress(input,outputFile);
         }else {
            String text_input = new String(Files.readAllBytes(Paths.get(input)));
             input_label.setText(text_input);
+            undoStack.push(text_input);
             File inputFile = new File(input);
             HuffmanCompression.compress(inputFile, outputFile);
         }
@@ -65,6 +69,7 @@ public class HelloController {
         System.setIn(InputStream);
         output_label.setText(output);
         compressed_text=output;
+        undoStack.push(output);
     }
     private File promptUserForOutputFile() {
         FileChooser fileChooser = new FileChooser();
@@ -75,21 +80,24 @@ public class HelloController {
 
 
     @FXML
-    protected void OnDecompressButtonClick (ActionEvent event)  {
+    protected void OnDecompressButtonClick (ActionEvent event) throws IOException {
 
         //String input = txtBox.getText(); // Get input from the text box
         //  File inputFile = new File(input); // Assume input is a file path
-        input_label.setText(compressed_text);
+        //input_label.setText(compressed_text);
         output_label.setText("Choose the compressed file path and file path to save the decompressed version ,please");
         File inputFile = promptUserForOutputFile();
         File outputFile = promptUserForOutputFile(); // Prompt for output file
-
+        String intext = Files.readString(outputFile.toPath());
+        undoStack.push(intext);
+        input_label.setText(intext);
         try {
             HuffmanCompression.decompress(inputFile,outputFile); // Perform decompression
             output_label.setText("Decompression successful!");
             // Optionally, display decompressed content on output_label:
             String decompressedText = Files.readString(outputFile.toPath());
             output_label.setText(decompressedText);
+            undoStack.push(decompressedText);
         } catch (IOException e) {
             output_label.setText("Decompression failed: " + e.getMessage());
             e.printStackTrace();
@@ -97,9 +105,23 @@ public class HelloController {
     }
 
     @FXML
-    protected void OnFormatButtonClick (ActionEvent event) {
-
+    protected void OnFormatButtonClick (ActionEvent event) throws IOException {
+        String userInput = txtBox.getText();
+        XmlFile xmlFile;
+        if (userInput.trim().startsWith("<")) {
+            xmlFile = new XmlFile(userInput);
+        }else{
+            userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+            xmlFile = new XmlFile(userInput);
+        }
+        input_label.setText(userInput);
+        //String newFile = xmlFile.correctErrors();
+        String newFile = Prettifying.prettify(userInput);
+        output_label.setText(newFile);
+        output_text = newFile;
+        undoStack.push(newFile);
     }
+
 
     @FXML
     protected void OnMinifyButtonClick (ActionEvent event) {
@@ -110,6 +132,37 @@ public class HelloController {
     protected void OnJSONButtonClick (ActionEvent event) {
 
 
+    }
+    @FXML
+    protected void undoButtonClick (ActionEvent event) throws IOException {
+        String userInput = txtBox.getText();
+        XmlFile xmlFile;
+        if (userInput.trim().startsWith("<")) {
+            xmlFile = new XmlFile(userInput);
+        }else{
+            userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+            xmlFile = new XmlFile(userInput);
+        }
+        input_label.setText(userInput);
+        String newFile = UNDO_REDO.undoModification(userInput);
+        output_label.setText(newFile);
+        output_text = newFile;
+    }
+
+    @FXML
+    protected void redoButtonClick (ActionEvent event) throws IOException {
+        String userInput = txtBox.getText();
+        XmlFile xmlFile;
+        if (userInput.trim().startsWith("<")) {
+            xmlFile = new XmlFile(userInput);
+        }else{
+            userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+            xmlFile = new XmlFile(userInput);
+        }
+        input_label.setText(userInput);
+        String newFile = UNDO_REDO.redoModification(userInput);
+        output_label.setText(newFile);
+        output_text = newFile;
     }
     @FXML
     protected void OnGraphButtonClick (ActionEvent event) throws Exception {
@@ -146,15 +199,18 @@ public class HelloController {
         XmlFile xmlFile;
         if (userInput.trim().startsWith("<")) {
             xmlFile = new XmlFile(userInput);
+            undoStack.push(userInput);
         }else{
             userInput = new String(Files.readAllBytes(Paths.get(userInput)));
             xmlFile = new XmlFile(userInput);
+            undoStack.push(userInput);
         }
         input_label.setText(userInput);
         String newFile = xmlFile.correctErrors();
         newFile = Prettifying.prettify(newFile);
         output_label.setText(newFile);
         output_text = newFile;
+        undoStack.push(newFile);
     }
     @FXML
     protected void OnPostSearchButtonClick (ActionEvent event) {

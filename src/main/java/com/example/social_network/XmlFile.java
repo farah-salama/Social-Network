@@ -120,7 +120,7 @@ public class XmlFile {
                             Matcher matcher5 = pattern5.matcher(line);
                             if (matcher5.find()){
                                 output += "<" + matcher5.group(2) + ">" + matcher5.group(1) + "</" + matcher5.group(2) + ">\n";
-                            }
+                            }else output += line.trim();
                         }
                     }
                 }
