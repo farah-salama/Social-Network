@@ -22,7 +22,7 @@
             <font>
                 <Font name="System Bold" size="12.0" />
             </font></Button>
-        <Button layoutX="205.0" layoutY="629.0" mnemonicParsing="false" onAction="#OnMinifyButtonClick" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #6587a1;" text="Minifying" textFill="#000000f5">
+        <Button layoutX="205.0" layoutY="629.0" mnemonicParsing="false" onAction="#OnMinifyButtonClick" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #6587a1;" text="Minify" textFill="#000000f5">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font></Button>
