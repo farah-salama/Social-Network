@@ -17,76 +17,88 @@ public class AnalysisController {
 
     @FXML
     protected void OnMostInfluentialButtonClick (ActionEvent event) {
+        output_label.setText(""); // Clear the label
         user1.clear();
         user2.clear();
         user_suggest.clear();
-        String str[] = SocialNetworkAnalysis.theMostInfluentialUsers());
+        String str[] = SocialNetworkAnalysis.theMostInfluentialUsers();
+        StringBuilder sb = new StringBuilder();
         for (String userName: str){
-             if(userName==null)
-             {
-                 break;
-             }
-             else
-             {
-                 output_label.setText(userName);
-             }
+            if(userName==null)
+            {
+                break;
+            }
+            else
+            {
+                sb.append(userName).append("\n");
+            }
         }
+        output_label.setText(sb.toString());
     }
-    
+
      @FXML
-    protected void OnMostActiveButtonClick (ActionEvent event) {
-        user1.clear();
-        user2.clear();
-        user_suggest.clear();
-        String str[] = SocialNetworkAnalysis.theMostActiveUsers();
-        for (String userName: str){
+     protected void OnMostActiveButtonClick (ActionEvent event) {
+         output_label.setText(""); // Clear the label
+         user1.clear();
+         user2.clear();
+         user_suggest.clear();
+         String str[] = SocialNetworkAnalysis.theMostActiveUsers();
+         StringBuilder sb = new StringBuilder();
+         for (String userName: str){
              if(userName==null)
              {
                  break;
              }
              else
              {
-                 output_label.setText(userName);
+                 sb.append(userName).append("\n");
              }
-        }
-    }
-    
+         }
+         output_label.setText(sb.toString());
+     }
+
     @FXML
     protected void OnMutualButtonClick (ActionEvent event) {
+        output_label.setText(""); // Clear the label
+        String str[] = SocialNetworkAnalysis.getMutualFollowers(Integer.parseInt(user1.getText()),Integer.parseInt(user2.getText()));
+        StringBuilder sb = new StringBuilder();
+        for (String userName: str){
+            if(userName==null)
+            {
+                break;
+            }
+            else
+            {
+                sb.append(userName).append("\n");
+            }
+        }
+        output_label.setText(sb.toString());
         user1.clear();
         user2.clear();
         user_suggest.clear();
-        String str[] =   SocialNetworkAnalysis.getMutualFollowers(Integer.parseInt(user1.getText()),Integer.parseInt(user2.getText()));
-        for (String userName: str){
-             if(userName==null)
-             {
-                 break;
-             }
-             else
-             {
-                 output_label.setText(userName);
-             }
-        }
     }
-    
+
     @FXML
     protected void OnSuggestButtonClick (ActionEvent event) {
+        output_label.setText(""); // Clear the label
+        String str[] = SocialNetworkAnalysis.suggestedFollowers(Integer.parseInt(user_suggest.getText()));
+        StringBuilder sb = new StringBuilder();
+        for (String userName: str){
+            if(userName==null)
+            {
+                break;
+            }
+            else
+            {
+                sb.append(userName).append("\n");
+            }
+        }
+        output_label.setText(sb.toString());
         user1.clear();
         user2.clear();
         user_suggest.clear();
-        String str[] = SocialNetworkAnalysis.suggestedFollowers(Integer.parseInt(user_suggest.getText()));
-        for (String userName: str){
-             if(userName==null)
-             {
-                 break;
-             }
-             else
-             {
-                 output_label.setText(userName);
-             }
-        }
     }
-    
+
     /*
     @FXML
     protected void OnMostActiveButtonClick (ActionEvent event) {
@@ -102,7 +114,7 @@ public class AnalysisController {
         }
         output_label.setText(str);
     }
-    
+
     @FXML
     protected void OnMutualButtonClick (ActionEvent event) {
         String str = "";
