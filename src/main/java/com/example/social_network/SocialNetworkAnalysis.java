@@ -159,7 +159,7 @@ public static String[]theMostInfluentialUsers() {
             names[i++]=follower.getName();
         } 
         
-        if(names.length == 0)
+        if(names[0] == null)
             return new String[]{"No mutual followers found"};
         else
            return names;
