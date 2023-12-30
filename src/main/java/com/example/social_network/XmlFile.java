@@ -52,12 +52,12 @@ public class XmlFile {
                         Pattern pattern4 = Pattern.compile("^\\s*<(.*)>(.*)$");
                         Matcher matcher4 = pattern4.matcher(line);
                         if (matcher4.find()){
-                            if(matcher4.group(2) != null) errors += "Missing closing tag Error in the line: " + line + '\n';
+                            if(matcher4.group(2) != null) errors += "Missing closing tag Error in the line: " + line.trim() + '\n';
                         }else{
                             Pattern pattern5 = Pattern.compile("^\\s*(.*)</(.*)>$");
                             Matcher matcher5 = pattern5.matcher(line);
                             if (matcher5.find()){
-                                errors += "Missing opening tag Error in the line: " + line + '\n';
+                                errors += "Missing opening tag Error in the line: " + line.trim() + '\n';
                             }
                         }
                     }
