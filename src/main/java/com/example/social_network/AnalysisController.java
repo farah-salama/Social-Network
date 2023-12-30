@@ -17,6 +17,9 @@ public class AnalysisController {
 
     @FXML
     protected void OnMostInfluentialButtonClick (ActionEvent event) {
+        user1.clear();
+        user2.clear();
+        user_suggest.clear();
         String str[] = SocialNetworkAnalysis.theMostInfluentialUsers());
         for (String userName: str){
              if(userName==null)
@@ -32,6 +35,9 @@ public class AnalysisController {
     
      @FXML
     protected void OnMostActiveButtonClick (ActionEvent event) {
+        user1.clear();
+        user2.clear();
+        user_suggest.clear();
         String str[] = SocialNetworkAnalysis.theMostActiveUsers();
         for (String userName: str){
              if(userName==null)
@@ -47,6 +53,9 @@ public class AnalysisController {
     
     @FXML
     protected void OnMutualButtonClick (ActionEvent event) {
+        user1.clear();
+        user2.clear();
+        user_suggest.clear();
         String str[] =   SocialNetworkAnalysis.getMutualFollowers(Integer.parseInt(user1.getText()),Integer.parseInt(user2.getText()));
         for (String userName: str){
              if(userName==null)
@@ -62,6 +71,9 @@ public class AnalysisController {
     
     @FXML
     protected void OnSuggestButtonClick (ActionEvent event) {
+        user1.clear();
+        user2.clear();
+        user_suggest.clear();
         String str[] = SocialNetworkAnalysis.suggestedFollowers(Integer.parseInt(user_suggest.getText()));
         for (String userName: str){
              if(userName==null)
