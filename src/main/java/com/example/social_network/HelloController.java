@@ -129,7 +129,7 @@ public class HelloController {
     protected void OnMinifyButtonClick (ActionEvent event) {
     String userInput = txtBox.getText();
     XmlFile xmlFile;
-   if (userInput.trim().startsWith("<")) 
+   if (userInput.trim().startsWith("<")||userInput.trim().startsWith("{")) 
     {
      xmlFile = new XmlFile(userInput);
     }
