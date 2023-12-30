@@ -119,7 +119,7 @@ public class HelloController {
         output_text = newFile;
         undoStack.push(newFile);
     }
-    
+
     @FXML
     protected void OnMinifyButtonClick (ActionEvent event) throws Exception {
     String userInput = txtBox.getText();
