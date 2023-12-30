@@ -15,7 +15,6 @@ import static com.example.social_network.UNDO_REDO.undoStack;
 
 public class HelloController {
     private String output_text;
-    private String compressed_text;
 
     @FXML
     private TextArea txtBox;
@@ -46,7 +45,8 @@ public class HelloController {
     protected void OnCompressButtonClick (ActionEvent event) throws IOException {
         String input = txtBox.getText();
         output_label.setText("Choose file path to save the compressed version,please");
-        File outputFile = promptUserForOutputFile(); // Get output file from user
+        //File outputFile = promptUserForOutputFile(); // Get output file from user
+        File outputFile = new File("outfile.xml");
         if ((input.trim().startsWith("<"))|(input.trim().startsWith("{"))) {
             input_label.setText(input);
             undoStack.push(input);
@@ -68,8 +68,9 @@ public class HelloController {
         BitInputStream.close();
         System.setIn(InputStream);
         output_label.setText(output);
-        compressed_text=output;
         undoStack.push(output);
+        output_text = output;
+        outputFile.delete();
     }
     private File promptUserForOutputFile() {
         FileChooser fileChooser = new FileChooser();
@@ -98,6 +99,7 @@ public class HelloController {
             String decompressedText = Files.readString(outputFile.toPath());
             output_label.setText(decompressedText);
             undoStack.push(decompressedText);
+            output_text = decompressedText;
         } catch (IOException e) {
             output_label.setText("Decompression failed: " + e.getMessage());
             e.printStackTrace();
