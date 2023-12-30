@@ -79,7 +79,6 @@ public class HelloController {
         return fileChooser.showSaveDialog(new Stage());
     }
 
-
     @FXML
     protected void OnDecompressButtonClick (ActionEvent event) throws IOException {
 
@@ -298,7 +297,7 @@ public class HelloController {
 
     @FXML
     protected void OnNewFileButtonClick (ActionEvent event) {
-        File file = new File("output.xml");
+        File file = new File("output.txt");
         try (FileOutputStream fos = new FileOutputStream(file)) {
             byte[] bytes = output_text.getBytes();
             fos.write(bytes);
