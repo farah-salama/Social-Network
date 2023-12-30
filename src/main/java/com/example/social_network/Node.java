@@ -18,15 +18,15 @@ public class Node {
         private String tagValue=null;
         private Node parent;
         private List<Node> children=null;
-        private int depth;
+       // private int depth;
 
-    public int getDepth() {
-        return depth;
-    }
+    // public int getDepth() {
+    //     return depth;
+    // }
 
-    public void setDepth(int depth) {
-        this.depth = depth;
-    }
+    // public void setDepth(int depth) {
+    //     this.depth = depth;
+    // }
 
         public Node(String tagName) {
             this.tagName = tagName;

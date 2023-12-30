@@ -89,16 +89,17 @@ public class XMLtoJSON{
                                 root = newNode;
                             }
                             currentNode = newNode;
-                        } else {
-                            Node newNode = new Node(tagName);
-                            newNode.setParent(currentNode);
-                            if (currentNode != null) {
-                                currentNode.addChild(newNode);
-                            } else {
-                                root = newNode;
-                            }
-                            currentNode = newNode;
-                        }
+                        } 
+                        // else {
+                        //     Node newNode = new Node(tagName);
+                        //     newNode.setParent(currentNode);
+                        //     if (currentNode != null) {
+                        //         currentNode.addChild(newNode);
+                        //     } else {
+                        //         root = newNode;
+                        //     }
+                        //     currentNode = newNode;
+                        // }
                     }
                 }
                 currentText.setLength(0);
