@@ -32,7 +32,7 @@ public class AnalysisController {
     protected void OnMutualButtonClick (ActionEvent event) {
         String str = "";
         for (String user:
-                SocialNetworkAnalysis.getMutualFollowers(user1.getText(),user2.getText())) {
+                SocialNetworkAnalysis.getMutualFollowers(Integer.parseInt(user1.getText()),Integer.parseInt(user2.getText()))) {
             str += user + '\n';
         }
         output_label.setText(str);
@@ -41,7 +41,7 @@ public class AnalysisController {
     protected void OnSuggestButtonClick (ActionEvent event) {
         String str = "";
         for (String user:
-                SocialNetworkAnalysis.suggestedFollowers(user_suggest.getText())) {
+                SocialNetworkAnalysis.suggestedFollowers(Integer.parseInt(user_suggest.getText()))) {
             str += user + '\n';
         }
         output_label.setText(str);
