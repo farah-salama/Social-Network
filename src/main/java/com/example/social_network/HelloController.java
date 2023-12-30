@@ -45,8 +45,8 @@ public class HelloController {
     protected void OnCompressButtonClick (ActionEvent event) throws IOException {
         String input = txtBox.getText();
         output_label.setText("Choose file path to save the compressed version,please");
-        //File outputFile = promptUserForOutputFile(); // Get output file from user
-        File outputFile = new File("outfile.xml");
+        File outputFile = promptUserForOutputFile(); // Get output file from user
+        //File outputFile = new File("outfile.txt");
         if ((input.trim().startsWith("<"))|(input.trim().startsWith("{"))) {
             input_label.setText(input);
             undoStack.push(input);
@@ -70,7 +70,7 @@ public class HelloController {
         output_label.setText(output);
         undoStack.push(output);
         output_text = output;
-        outputFile.delete();
+        //outputFile.delete();
     }
     private File promptUserForOutputFile() {
         FileChooser fileChooser = new FileChooser();
