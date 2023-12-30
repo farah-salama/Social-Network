@@ -21,7 +21,7 @@ public class AnalysisController {
     }
     @FXML
     protected void OnMostInfluentialButtonClick (ActionEvent event) {
-        String str[] = NetworkAnalysis2.theMostInfluencerUsers());
+        String str[] = SocialNetworkAnalysis.theMostInfluencerUsers());
         for (String userName: str){
              if(userName==null)
              {
