@@ -54,8 +54,8 @@ public class XMLtoJSON{
             e.printStackTrace();
         }
     }
-
-    private static Node parseXML(String xml) {
+//ParseXML and Build the tree
+    public static Node parseXML(String xml) {
         Node root = null;
         Node currentNode = null;
         StringBuilder currentText = new StringBuilder();
@@ -128,8 +128,8 @@ public class XMLtoJSON{
         return "";
     }
 
-    //new
-    private static void printJsonTree(Node node, int level, StringBuilder jsonBuilder, boolean is_multilevel) {
+    
+    public static void printJsonTree(Node node, int level, StringBuilder jsonBuilder, boolean is_multilevel) {
         /* This block creates the indentation */
         String indentation = "    ";
 
