@@ -21,6 +21,20 @@ public class AnalysisController {
     }
     @FXML
     protected void OnMostInfluentialButtonClick (ActionEvent event) {
+        String str[] = NetworkAnalysis2.theMostInfluencerUsers());
+        for (String userName: str){
+             if(userName==null)
+             {
+                 break;
+             }
+             else
+             {
+                 output label.setText(userName);
+             }
+        }
+    }
+    /*
+    protected void OnMostInfluentialButtonClick (ActionEvent event) {
         String str = "";
         for (String user:
                 SocialNetworkAnalysis.theMostInfluencerUsers()) {
@@ -28,6 +42,7 @@ public class AnalysisController {
         }
         output_label.setText(str);
     }
+    */
     @FXML
     protected void OnMutualButtonClick (ActionEvent event) {
         String str = "";
