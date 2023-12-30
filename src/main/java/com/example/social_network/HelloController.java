@@ -131,9 +131,30 @@ public class HelloController {
 
     }
     @FXML
-    protected void OnJSONButtonClick (ActionEvent event) {
+     protected void OnJSONButtonClick (ActionEvent event) {
+        String userInput = txtBox.getText();
+        XmlFile xmlFile;
+        XMLtoJSON xmlTOjson=new XMLtoJSON();
+        if (userInput.trim().startsWith("<")) {
+            xmlFile = new XmlFile(userInput);
+        }else{
+            try {
+                userInput = new String(Files.readAllBytes(Paths.get(userInput)));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            xmlFile = new XmlFile(userInput);
+        }
+        input_label.setText(userInput);
+        Node root=xmlTOjson.parseXML(userInput);
+        StringBuilder JsonBuilder = new StringBuilder();
+        JsonBuilder.append("{\n");
+        xmlTOjson.printJsonTree(root, 1, JsonBuilder, false);
+        JsonBuilder.append("\n}");
+        String newFile = JsonBuilder.toString();
 
-
+        output_label.setText(newFile);
+        output_text = newFile;
     }
     @FXML
     protected void undoButtonClick (ActionEvent event) throws IOException {
