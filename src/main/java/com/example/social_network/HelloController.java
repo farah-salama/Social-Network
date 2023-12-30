@@ -298,7 +298,8 @@ public class HelloController {
 
     @FXML
     protected void OnNewFileButtonClick (ActionEvent event) {
-        File file = new File("output.txt");
+        //File file = new File("output.txt");
+        File file = promptUserForOutputFile();
         try (FileOutputStream fos = new FileOutputStream(file)) {
             byte[] bytes = output_text.getBytes();
             fos.write(bytes);
