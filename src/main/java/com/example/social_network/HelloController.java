@@ -119,43 +119,22 @@ public class HelloController {
         output_text = newFile;
         undoStack.push(newFile);
     }
-
-
+    
     @FXML
-<<<<<<< Updated upstream
-    protected void OnMinifyButtonClick (ActionEvent event) {
+    protected void OnMinifyButtonClick (ActionEvent event) throws Exception {
     String userInput = txtBox.getText();
-    XmlFile xmlFile;
-   if (userInput.trim().startsWith("<")||userInput.trim().startsWith("{")) 
-    {
-     xmlFile = new XmlFile(userInput);
-    }
-   else
+   if (!userInput.trim().startsWith("<")||userInput.trim().startsWith("{"))
     {
      userInput = new String(Files.readAllBytes(Paths.get(userInput)));
-     xmlFile = new XmlFile(userInput);
-    }        
+    }
+    undoStack.push(userInput);
     input_label.setText(userInput);
     String newFile = MinifyingXML.Minifying(userInput);
     output_label.setText(newFile);
     output_text = newFile;
-    }
-    
-=======
-    protected void OnMinifyButtonClick (ActionEvent event) throws Exception {
-        String userInput = txtBox.getText();
-        if (!userInput.trim().startsWith("<")) {
-            userInput = new String(Files.readAllBytes(Paths.get(userInput)));
-        }
-        undoStack.push(userInput);
-        input_label.setText(userInput);
-        String newFile = MinifyingXML.Minifying(userInput);
-        output_label.setText(newFile);
-        output_text = newFile;
-        undoStack.push(newFile);
+    undoStack.push(newFile);
     }
 
->>>>>>> Stashed changes
     @FXML
      protected void OnJSONButtonClick (ActionEvent event) {
         String userInput = txtBox.getText();
