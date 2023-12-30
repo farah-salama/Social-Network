@@ -85,7 +85,7 @@ public class HelloController {
         //String input = txtBox.getText(); // Get input from the text box
         //  File inputFile = new File(input); // Assume input is a file path
         //input_label.setText(compressed_text);
-        output_label.setText("Choose the compressed file path and file path to save the decompressed version ,please");
+        output_label.setText("Choose the compressed file path and a file path \nto save the decompressed version, please.");
         File inputFile = promptUserForOutputFile();
         File outputFile = promptUserForOutputFile(); // Prompt for output file
         String intext = Files.readString(outputFile.toPath());
