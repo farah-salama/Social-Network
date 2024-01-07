@@ -24,9 +24,9 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <TextArea fx:id="user1" layoutX="216.0" layoutY="106.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="130.0" promptText="First User's Name" />
-      <TextArea fx:id="user2" layoutX="375.0" layoutY="106.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="130.0" promptText="Second User's Name" />
-      <TextArea fx:id="user_suggest" layoutX="298.0" layoutY="164.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="130.0" promptText="User's Name" />
+      <TextArea fx:id="user1" layoutX="216.0" layoutY="106.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="130.0" promptText="First User's ID" />
+      <TextArea fx:id="user2" layoutX="375.0" layoutY="106.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="130.0" promptText="Second User's ID" />
+      <TextArea fx:id="user_suggest" layoutX="298.0" layoutY="164.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="130.0" promptText="User's ID" />
       <Label fx:id="output_label" alignment="CENTER" layoutX="87.0" layoutY="217.0" lineSpacing="1.0" prefHeight="206.0" prefWidth="386.0" style="-fx-background-color: #bacbdc;" textFill="#c91e1e">
          <font>
             <Font size="16.0" />
