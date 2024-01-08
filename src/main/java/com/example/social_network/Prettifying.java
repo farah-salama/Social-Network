@@ -28,7 +28,7 @@ public class Prettifying {
         StringBuilder str = new StringBuilder();
 
         /* Insert a new line after each tag or data */
-        String[] lines = xmlFile.trim().replaceAll("<", "\n<").split("\n");
+        String[] lines = xmlFile.trim().replaceAll(">", ">\n").replaceAll("<", "\n<").split("\n");
 
         for (int i = 0; i < lines.length; i++) {
             /* Check if the line doesn't contain any data */

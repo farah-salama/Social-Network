@@ -62,13 +62,29 @@ public class GraphViewController {
                     double lineEndX = followerX + 10 * Math.cos(Math.atan2(userY - followerY, userX - followerX));
                     double lineEndY = followerY + 10 * Math.sin(Math.atan2(userY - followerY, userX - followerX));
 
-                    Line line = new Line(lineStartX, lineStartY, lineEndX, lineEndY);
+
+                    Line line;
+                    Polygon arrowhead;
+                    if (user.equals(follower)) { // If user and follower are the same
+                        // Create a loop with an arrowhead
+                        Arc loop = new Arc(userX, userY - 20, 20, 20, 0, 359);
+                        loop.setFill(Color.TRANSPARENT);
+                        loop.setStroke(Color.BLACK);
+                        graphPane.getChildren().add(loop);
 
 
-                    // Add arrowhead
-                    Polygon arrowhead = createArrowhead(lineStartX, lineStartY, lineEndX, lineEndY);
+                        // Create an arrowhead for the loop
+                        arrowhead = createArrowhead(userX, userY - 40, userX + 0.1, userY - 40);
+                    } else {
+                            line = new Line(lineStartX, lineStartY, lineEndX, lineEndY);
+                            graphPane.getChildren().add(line);
+
+                        // Add arrowhead
+                            arrowhead = createArrowhead(lineStartX, lineStartY, lineEndX, lineEndY);
+
+                    }
                     arrowhead.setFill(Color.BLACK); // Set the fill color to black
-                    graphPane.getChildren().addAll(line, arrowhead);
+                    graphPane.getChildren().add(arrowhead);
                 }
             }
         }
@@ -92,5 +108,3 @@ public class GraphViewController {
         return arrowhead;
     }
 }
-
-
